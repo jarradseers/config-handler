@@ -1,41 +1,102 @@
-# Object Merger
+# Configurator
 
-  Merge Objects properly instead of overwriting them.  Essentially a deep `Object.assign`. It's very simple, written in ES6+ and handles a basic deep copy of objects.
+  Load your configuration in hierarchy. If exists the following occurs:
 
-  This was written out of frustrations with `Object.assign` and the heavier weight of some alternative packages trying to support everything.
+  `package.json` is read (mainly useful for `name` and `version`).
+  `global config` file is read, and deeply merged with the existing object.
+  `environment config` file is finally read, deeply merging with the existing object.
+
+  Configurator doesn't modify any existing files, simply reads the configuration, deep merge occurs so entire blocks aren't erased.
 
 ## Usage
 
 ```js
-const merge = require('object-merger');
-const obj4 = merge(obj1, obj2, obj3); // returns a new object, doesn't modify existing.
+const configurator = require('configurator');
+const config = configurator();
+
+console.log(config) // { name: 'hi', verion: '1.0.0' } ...
 ```
 
-Optionally you could add a static to the `Object`
+Here is an example of how the config object is handled:
 
 ```js
-Object.merge = require('object-merger');
-const obj4 = Object.merge(obj1, obj2, obj3); // returns a new object, doesn't modify existing.
+// package.json
+{
+  name: 'my-project',
+  version: '1.0.0'
+}
 ```
 
-Check out the [test folder](test) for more!
+```js
+// config/all.js
+module.exports = {
+  server: {
+    port: 3000,
+    db: {
+      user: 'name',
+      pass: 'secr3t'
+    }
+  }
+}
+```
+
+```js
+// assume either NODE_ENV=development or not set
+// config/development.js
+module.exports = {
+  server: {
+    port: 3333,
+    db: {
+      pass: 'supersecr3t'
+    }
+  }
+}
+```
+
+Resulting config object:
+
+```js
+{
+  name: 'my-project',
+  version: '1.0.0',
+  server: {
+    port: 3333,
+    db: {
+      user: 'name',
+      pass: 'supersecr3t'
+    }
+  }
+}
+```
+
+Check out the [test folder](test) and [example folder](example) for more!
 
 ## Installation
 
 ```bash
-$ npm install object-merger
+$ npm install configurator
 ```
 
 ## Features
 
-  * Merge multiple objects instead of overwrite them.
-  * Simple, fast, light-weight with no external dependencies
+  * Deeply merge multiple configuration files in hierarchy.
+  * Includes package.json if exists.
+  * Loads global configuration file.
+  * Loads local environment configuration file.
+  * Catches errors in config files.
+  * Configurable.
+  * Supports `.js`, `.json`, `.node` extensions.
+  * Simple, fast and light-weight.
   * Written in ES6+ for node.js 6+
-  * Test driven
 
 ## Options
 
-  As many objects as you'd like to merge from left to right.
+  `dir` - {string} - Name of the config dir, defaults to `config`.
+  `log` - {boolean} - Whether or not to output logging, defaults to `false`.
+  `cwd` - {string} - Current working directory location, defaults to `process.cwd()`
+  `env` - {string} - environment name for local config file, defaults to `NODE_ENV` or `development`.
+  `global` - {string} - name of the global config file to load, defaults to `all`.
+  `logger` - {function | object} - logger to use, defaults to `console`.
 
 ## Tests
 

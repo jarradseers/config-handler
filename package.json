@@ -1,0 +1,42 @@
+{
+  "name": "configurator",
+  "version": "1.0.0",
+  "engines" : {
+    "node" : ">=6.0.0"
+  },
+  "engineStrict": true,
+  "description": "Load configuration files in a deep merge based on environment.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "object-merger": "^1.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jarradseers/configurator.git"
+  },
+  "keywords": [
+    "config",
+    "configure",
+    "environment",
+    "config",
+    "app",
+    "config",
+    "mvc",
+    "deep",
+    "merge",
+    "config"
+  ],
+  "author": "Jarrad Seers <jarrad@seers.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jarradseers/configurator/issues"
+  },
+  "homepage": "https://github.com/jarradseers/configurator#readme"
+}

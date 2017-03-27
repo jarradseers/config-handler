@@ -1,4 +1,4 @@
-# Configurator
+# Config Handler
 
   Load your configuration in hierarchy. If exists the following occurs:
 
@@ -6,14 +6,12 @@
   `global config` file is read, and deeply merged with the existing object.
   `environment config` file is finally read, deeply merging with the existing object.
 
-  Configurator doesn't modify any existing files, simply reads the configuration, deep merge occurs so entire blocks aren't erased.
+  Config-Handler doesn't modify any existing files, simply reads the configuration, deep merge occurs so entire blocks aren't erased.
 
 ## Usage
 
 ```js
-const configurator = require('configurator');
-const config = configurator();
-
+const config = require('config-handler')();
 console.log(config) // { name: 'hi', verion: '1.0.0' } ...
 ```
 
@@ -74,7 +72,7 @@ Check out the [test folder](test) and [example folder](example) for more!
 ## Installation
 
 ```bash
-$ npm install configurator
+$ npm install config-handler
 ```
 
 ## Features

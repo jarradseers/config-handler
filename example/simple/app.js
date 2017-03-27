@@ -1,5 +1,5 @@
 /*!
- * Configurator.
+ * Config Handler.
  *
  * Simple example app file.
  * @author Jarrad Seers <jarrad@seers.me>
@@ -12,9 +12,7 @@
  * Module dependencies.
  */
 
-const configurator = require('../../');
-
-const config = configurator({
+const config = require('../../')({
   log: true
 });
 

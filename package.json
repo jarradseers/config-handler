@@ -1,11 +1,11 @@
 {
-  "name": "configurator",
+  "name": "config-handler",
   "version": "1.0.0",
   "engines" : {
     "node" : ">=6.0.0"
   },
   "engineStrict": true,
-  "description": "Load configuration files in a deep merge based on environment.",
+  "description": "Handles configuration files based on environment.",
   "main": "index.js",
   "directories": {
     "test": "test"
@@ -19,24 +19,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jarradseers/configurator.git"
+    "url": "git+https://github.com/jarradseers/config-handler.git"
   },
   "keywords": [
     "config",
     "configure",
+    "handler",
+    "require",
     "environment",
-    "config",
-    "app",
-    "config",
     "mvc",
     "deep",
-    "merge",
-    "config"
+    "merge"
   ],
   "author": "Jarrad Seers <jarrad@seers.me>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jarradseers/configurator/issues"
+    "url": "https://github.com/jarradseers/config-handler/issues"
   },
-  "homepage": "https://github.com/jarradseers/configurator#readme"
+  "homepage": "https://github.com/jarradseers/config-handler#readme"
 }

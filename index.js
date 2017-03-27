@@ -1,5 +1,5 @@
 /*!
- * Configurator.
+ * Config Handler.
  *
  * Main application entry.
  * @author Jarrad Seers <jarrad@seers.me>
@@ -12,4 +12,4 @@
  * Module exports.
  */
 
-module.exports = require('./lib/configurator');
+module.exports = require('./lib/config-handler');

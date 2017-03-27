@@ -1,5 +1,5 @@
 /*!
- * Configurator.
+ * Config Handler.
  *
  * Main test file.
  * @author Jarrad Seers <jarrad@seers.me>
@@ -12,13 +12,12 @@
  * Module dependencies.
  */
 
-const configurator = require('../');
 const assert = require('assert');
 const join = require('path').join;
 
 let total = 0;
 
-const config = configurator({
+const config = require('../')({
   cwd: join(__dirname, '..', 'example', 'simple'),
   log: true
 });

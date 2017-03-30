@@ -1,8 +1,8 @@
 {
   "name": "config-handler",
-  "version": "1.0.1",
-  "engines" : {
-    "node" : ">=6.0.0"
+  "version": "2.0.0",
+  "engines": {
+    "node": ">=6.0.0"
   },
   "engineStrict": true,
   "description": "Handles configuration files based on environment.",
@@ -13,7 +13,9 @@
   "dependencies": {
     "object-merger": "^1.0.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^3.18.0"
+  },
   "scripts": {
     "test": "node test"
   },

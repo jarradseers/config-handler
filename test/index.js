@@ -6,14 +6,12 @@
  * @created 27/03/2017 NZDT
  */
 
-'use strict';
-
 /**
  * Module dependencies.
  */
 
 const assert = require('assert');
-const join = require('path').join;
+const { join } = require('path');
 
 let total = 0;
 
@@ -23,6 +21,6 @@ const config = require('../')({
 });
 
 const expected = require('./expected');
-assert.deepStrictEqual(expected, config) || total ++;
+assert.deepStrictEqual(expected, config) || total++;
 
 console.log(`All ${total} of ${total} tests passed.`);

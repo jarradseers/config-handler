@@ -6,14 +6,10 @@
  * @created 27/03/2017 NZDT
  */
 
-'use strict';
-
 /**
  * Module dependencies.
  */
 
-const config = require('../../')({
-  log: true
-});
+const config = require('../../')({ log: true });
 
-console.log(' = Final output:\n', JSON.stringify(config, null, 2));
+console.log(' = Final output:\n', JSON.stringify(config, null, '  '));

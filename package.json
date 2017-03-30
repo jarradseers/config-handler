@@ -1,6 +1,6 @@
 {
   "name": "config-handler",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "engines": {
     "node": ">=6.0.0"
   },
@@ -17,7 +17,7 @@
     "eslint": "^3.18.0"
   },
   "scripts": {
-    "test": "node test"
+    "test": "eslint . && node test"
   },
   "repository": {
     "type": "git",

@@ -89,12 +89,18 @@ $ npm install config-handler
 
 ## Options
 
-  `dir` - {string} - Name of the config dir, defaults to `config`.
-  `log` - {boolean} - Whether or not to output logging, defaults to `false`.
-  `cwd` - {string} - Current working directory location, defaults to `process.cwd()`
-  `env` - {string} - environment name for local config file, defaults to `NODE_ENV` or `development`.
-  `global` - {string} - name of the global config file to load, defaults to `all`.
-  `logger` - {function | object} - logger to use, defaults to `console`.
+  The options are passed in as an object to the config:
+
+  ```js
+  const config = require('config')({ /* options */ });
+  ```
+
+  * `dir` - {string} - Name of the config dir, defaults to `config`.
+  * `log` - {boolean} - Whether or not to output logging, defaults to `false`.
+  * `cwd` - {string} - Current working directory location, defaults to `process.cwd()`
+  * `env` - {string} - environment name for local config file, defaults to `NODE_ENV` or `development`.
+  * `global` - {string} - name of the global config file to load, defaults to `all`.
+  * `logger` - {function | object} - logger to use, defaults to `console`.
 
 ## Tests
 

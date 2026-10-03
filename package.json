@@ -1,23 +1,18 @@
 {
   "name": "config-handler",
-  "version": "2.0.3",
+  "version": "2.0.4",
+  "description": "Load configuration, deep merging package.json, a global file and an environment file.",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "lib"
+  ],
   "engines": {
     "node": ">=6.0.0"
   },
-  "engineStrict": true,
-  "description": "Handles configuration files based on environment.",
-  "main": "index.js",
-  "directories": {
-    "test": "test"
-  },
-  "dependencies": {
-    "object-merger": "^1.0.1"
-  },
-  "devDependencies": {
-    "eslint": "^3.18.0"
-  },
   "scripts": {
-    "test": "eslint . && node test"
+    "lint": "eslint .",
+    "test": "eslint . && node --test test/index.js"
   },
   "repository": {
     "type": "git",
@@ -25,11 +20,10 @@
   },
   "keywords": [
     "config",
+    "configuration",
     "configure",
-    "handler",
-    "require",
     "environment",
-    "mvc",
+    "node_env",
     "deep",
     "merge"
   ],
@@ -38,5 +32,13 @@
   "bugs": {
     "url": "https://github.com/jarradseers/config-handler/issues"
   },
-  "homepage": "https://github.com/jarradseers/config-handler#readme"
+  "homepage": "https://github.com/jarradseers/config-handler#readme",
+  "dependencies": {
+    "object-merger": "^1.0.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.12.0",
+    "globals": "^17.13.0"
+  }
 }

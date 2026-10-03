@@ -1,27 +1,37 @@
 # Config Handler
 
-  Load your configuration in hierarchy. If exists the following occurs:
+[![CI](https://github.com/jarradseers/config-handler/actions/workflows/ci.yml/badge.svg)](https://github.com/jarradseers/config-handler/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/config-handler.svg)](https://www.npmjs.com/package/config-handler)
 
-  `package.json` is read (mainly useful for `name` and `version`).
-  `global config` file is read, and deeply merged with the existing object.
-  `environment config` file is finally read, deeply merging with the existing object.
+Load your configuration in a hierarchy. Three sources are read, in order, and deeply merged so that later files override single values rather than whole blocks:
 
-  Config-Handler doesn't modify any existing files, simply reads the configuration, deep merge occurs so entire blocks aren't erased.
+1. `package.json` in the working directory (all of it; mainly useful for `name` and `version`).
+2. The global config file, `config/all`.
+3. The environment config file, `config/<NODE_ENV>`, defaulting to `config/development`.
+
+Any of the three may be missing. Nothing is written; the files are only read.
+
+## Installation
+
+```bash
+$ npm install config-handler
+```
 
 ## Usage
 
 ```js
 const config = require('config-handler')();
-console.log(config) // { name: 'hi', verion: '1.0.0' } ...
+
+console.log(config); // { name: 'my-project', version: '1.0.0', server: { ... } }
 ```
 
-Here is an example of how the config object is handled:
+Given these files:
 
 ```js
 // package.json
 {
-  name: 'my-project',
-  version: '1.0.0'
+  "name": "my-project",
+  "version": "1.0.0"
 }
 ```
 
@@ -35,12 +45,11 @@ module.exports = {
       pass: 'secr3t'
     }
   }
-}
+};
 ```
 
 ```js
-// assume either NODE_ENV=development or not set
-// config/development.js
+// config/development.js, used when NODE_ENV is development or not set
 module.exports = {
   server: {
     port: 3333,
@@ -48,10 +57,10 @@ module.exports = {
       pass: 'supersecr3t'
     }
   }
-}
+};
 ```
 
-Resulting config object:
+the resulting config object is:
 
 ```js
 {
@@ -67,49 +76,38 @@ Resulting config object:
 }
 ```
 
-Check out the [test folder](test) and [example folder](example) for more!
+Config files can be `.js`, `.json` or `.node`; they are loaded with `require`. Merging is done by [object-merger](https://github.com/jarradseers/object-merger), so arrays are concatenated rather than replaced.
 
-## Installation
-
-```bash
-$ npm install config-handler
-```
-
-## Features
-
-  * Deeply merge multiple configuration files in hierarchy.
-  * Includes package.json if exists.
-  * Loads global configuration file.
-  * Loads local environment configuration file.
-  * Catches errors in config files.
-  * Configurable.
-  * Supports `.js`, `.json`, `.node` extensions.
-  * Simple, fast and light-weight.
-  * Written in ES6+ for node.js 6+
+There is a runnable example in the [example folder](example).
 
 ## Options
 
-  The options are passed in as an object to the config:
+Options are passed as an object:
 
-  ```js
-  const config = require('config')({ /* options */ });
-  ```
+```js
+const config = require('config-handler')({ env: 'staging', log: true });
+```
 
-  * `dir` - {string} - Name of the config dir, defaults to `config`.
-  * `log` - {boolean} - Whether or not to output logging, defaults to `false`.
-  * `cwd` - {string} - Current working directory location, defaults to `process.cwd()`
-  * `env` - {string} - environment name for local config file, defaults to `NODE_ENV` or `development`.
-  * `global` - {string} - name of the global config file to load, defaults to `all`.
-  * `logger` - {function | object} - logger to use, defaults to `console`.
+| Option | Type | Default | Description |
+|---|---|---|---|
+| `cwd` | string | `process.cwd()` | Directory holding `package.json` and the config directory. |
+| `dir` | string | `config` | Name of the config directory, relative to `cwd`. |
+| `global` | string | `all` | Name of the global config file. |
+| `env` | string | `NODE_ENV`, then `development` | Name of the environment config file. |
+| `log` | boolean | `false` | Log which files were loaded. |
+| `logger` | object | `console` | Object with a `log` method, used when `log` is set. |
+
+## Errors
+
+A missing file is skipped. A file that exists but fails to load throws, including a syntax error or a `require` of a module that is not installed. Before 2.0.4 the latter was silently treated as a missing file.
 
 ## Tests
 
-  From the package 
-
-  ```bash
-  $ npm test
-  ```
+```bash
+$ npm install
+$ npm test
+```
 
 ## License
 
-  [MIT](LICENSE)
+[MIT](LICENSE)
